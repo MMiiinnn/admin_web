@@ -1,24 +1,104 @@
-import logo from './logo.svg';
-import './App.css';
+import { useEffect, useState, Fragment, useContext } from "react";
+import {
+  Routes,
+  Route,
+  useLocation,
+  useNavigate,
+  Navigate,
+} from "react-router-dom";
+import DefaultLayout from "./scenes/global/DefaultLayout";
+import { CssBaseline, ThemeProvider } from "@mui/material";
+import { ColorModeContext, useMode } from "./theme";
+import { StoreContext } from "./store";
+import config from "./config";
+import dayjs from "dayjs";
+import { privateRoutes, publicRoutes } from "./Routes";
 
 function App() {
+  const [theme, colorMode] = useMode();
+  const [state, dispatch] = useContext(StoreContext);
+  const titles = {
+    [config.routes.login]: "Footwear - Đăng nhập",
+    // [config.routes.order]: "Footwear - Đơn hàng",
+    [config.routes.staff]: "Footwear - Nhân viên",
+    [config.routes.dashboard]: "Footwear - Bảng điều khiển",
+    [config.routes.invoices]: "Footwear - Hóa đơn",
+    [config.routes.form]: "Footwear - Form",
+    // [config.routes.profile]: "Footwear - Tài khoản",
+    [config.routes.contacts]: "Footwear - Liên hệ",
+    [config.routes.calendar]: "Footwear - Lịch",
+    [config.routes.line]: "Footwear - Biểu đồ đường",
+    [config.routes.bar]: "Footwear - Biểu đồ cột",
+    [config.routes.pie]: "Footwear - Biểu đồ tròn",
+  };
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  // Check phiên đăng nhập
+  useEffect(() => {
+    const expireIn = dayjs(localStorage.getItem("expireIn"));
+    if (dayjs().isAfter(expireIn)) {
+      localStorage.clear();
+      alert("The login session has expired. Please log in again.");
+      navigate("/login");
+    }
+    document.title = titles[location.pathname] ?? "Footwear Web Page";
+  }, [location]);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <ColorModeContext.Provider value={colorMode}>
+      <ThemeProvider theme={theme}>
+        <CssBaseline />
+        <div className="app">
+          <Routes>
+            {privateRoutes.map((route, index) => {
+              let Layout = DefaultLayout;
+              if (route.layout) {
+                Layout = route.layout;
+              } else if (route.layout === null) {
+                Layout = Fragment;
+              }
+              const Element = route.component;
+              return (
+                <Route
+                  key={index}
+                  path={route.path}
+                  element={
+                    state.userInfo ? (
+                      <Layout>
+                        <Element />
+                      </Layout>
+                    ) : (
+                      <Navigate to={config.routes.login} replace />
+                    )
+                  }
+                />
+              );
+            })}
+            {publicRoutes.map((route, index) => {
+              let Layout = DefaultLayout;
+              if (route.layout) {
+                Layout = route.layout;
+              } else if (route.layout === null) {
+                Layout = Fragment;
+              }
+              const Element = route.component;
+              return (
+                <Route
+                  key={index}
+                  path={route.path}
+                  element={
+                    <Layout>
+                      <Element />
+                    </Layout>
+                  }
+                />
+              );
+            })}
+          </Routes>
+        </div>
+      </ThemeProvider>
+    </ColorModeContext.Provider>
   );
 }
 
