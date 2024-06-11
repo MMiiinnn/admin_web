@@ -1,233 +1,218 @@
-import * as httpRequest from '../utils/httpRequest';
-import axios from 'axios';
+import * as httpRequest from "../api/request";
 
-export const getListManager = async () => {
-    try {
-        const res = await httpRequest.get('admin/getListManager');
-        return res;
-    } catch (error) {
-        console.log(error);
-        return error.response && error.response.data;
-    }
-};
-
-export const changeIngredientActive = async (id) => {
-    try {
-        const res = await httpRequest.del(`ingredient/${id}`);
-        return res;
-    } catch (error) {
-        console.log(error);
-        return error.response && error.response.data;
-    }
+// Staff
+export const getListStaff = async () => {
+  try {
+    const res = await httpRequest.get("staff");
+    return res;
+  } catch (error) {
+    console.log(error);
+    return error.response && error.response.data;
+  }
 };
 
-export const getListShop = async () => {
-    try {
-        const res = await httpRequest.get('admin/getListShop');
-        return res;
-    } catch (error) {
-        console.log(error);
-        return error.response && error.response.data;
-    }
+export const updateStaff = async (id, body) => {
+  try {
+    console.log("ID: ", id);
+    console.log("Body: ", body);
+    const res = await httpRequest.put(`/staff/update/${id}`, body);
+    console.log(res);
+    return res;
+  } catch (error) {
+    console.log(error);
+    return error.response && error.response.data;
+  }
 };
-export const addShop = async (address, latitude, longitude, image, isActive) => {
-    const body = {
-        address,
-        latitude,
-        longitude,
-        image,
-        isActive,
-    };
-    try {
-        const res = await httpRequest.post(`admin/addShop`, body);
-        return res;
-    } catch (error) {
-        console.log(error);
-        return error.response && error.response.data;
-    }
-};
-export const editShop = async (body) => {
-    try {
-        const res = await httpRequest.patch(`shop`, body);
-        return res;
-    } catch (error) {
-        console.log(error);
-        return error.response && error.response.data;
-    }
-};
-export const getDataForChartByShop = async (idShop) => {
-    try {
-        const res = await httpRequest.get(`admin/getDataForChart/${idShop}`);
-        return res;
-    } catch (error) {
-        console.log(error);
-        return error.response && error.response.data;
-    }
-};
-export const getAllShopDataForChart = async () => {
-    try {
-        const res = await httpRequest.get(`admin/getAllDataForChart`);
-        return res;
-    } catch (error) {
-        console.log(error);
-        return error.response && error.response.data;
-    }
-};
-export const getAllIngredient = async (name) => {
-    try {
-        const config = { params: { name } };
-        const res = await httpRequest.get(`ingredient`, config);
-        return res;
-    } catch (error) {
-        console.log(error);
-        return error.response && error.response.data;
-    }
-};
-export const addIngredient = async (body) => {
-    try {
-        const res = await httpRequest.post(`ingredient`, body);
-        return res;
-    } catch (error) {
-        console.log(error);
-        return error.response && error.response.data;
-    }
-};
-export const editIngredient = async (id, body) => {
-    try {
-        console.log(id);
-        console.log(body);
-        const res = await httpRequest.patch(`ingredient/${id}`, body);
-        return res;
-    } catch (error) {
-        console.log(error);
-        return error.response && error.response.data;
-    }
-};
-export const getAllRecipe = async (idType) => {
-    const config = {
-        params: {
-            idType,
-        },
-    };
 
-    try {
-        const res = await httpRequest.get(`admin/getListRecipe`, config);
-        return res;
-    } catch (error) {
-        console.log(error);
-        return error.response && error.response.data;
-    }
+export const addStaff = async (body) => {
+  try {
+    const res = await httpRequest.post("/auth/register/staff", body);
+    return res;
+  } catch (error) {
+    console.log(error);
+    return error.response && error.response.data;
+  }
 };
-export const getDetailRecipe = async (idRecipe) => {
-    try {
-        const res = await httpRequest.get(`recipe/${idRecipe}`);
-        return res;
-    } catch (error) {
-        console.log(error);
-        return error.response && error.response.data;
-    }
+
+export const editStaff = async (id, body) => {
+  try {
+    const res = await httpRequest.patch(`staff/${id}`, body);
+    return res;
+  } catch (error) {
+    console.log(error);
+    return error.response && error.response.data;
+  }
 };
-export const addRecipe = async (body) => {
-    try {
-        const res = await httpRequest.post(`recipe`, body);
-        return res;
-    } catch (error) {
-        console.log(error);
-        return error.response && error.response.data;
-    }
+
+export const deleteStaff = async (id) => {
+  try {
+    const res = await httpRequest.del(`staff/delete/${id}`);
+    return res;
+  } catch (error) {
+    console.log(error);
+    return error.response && error.response.data;
+  }
 };
-export const editRecipe = async (idRecipe, body) => {
-    try {
-        const res = await httpRequest.patch(`recipe/${idRecipe}`, body);
-        return res;
-    } catch (error) {
-        console.log(error);
-        return error.response && error.response.data;
-    }
+
+// Provider
+export const getListProvider = async () => {
+  try {
+    const res = await httpRequest.get("provider");
+    return res;
+  } catch (error) {
+    console.log(error);
+    return error.response && error.response.data;
+  }
 };
-export const changeRecipeActive = async (idRecipe) => {
-    try {
-        const res = await httpRequest.del(`recipe/${idRecipe}`);
-        return res;
-    } catch (error) {
-        console.log(error);
-        return error.response && error.response.data;
-    }
+
+export const updateProvider = async (id, body) => {
+  try {
+    console.log("Body: ", body);
+    console.log("ID: ", id);
+    const res = await httpRequest.put(`/provider/update/${id}`, body);
+    return res;
+  } catch (error) {
+    console.log(error);
+    return error.response && error.response.data;
+  }
 };
-export const addIngredientFromRecipe = async (body) => {
-    try {
-        const res = await httpRequest.post(`recipe-ingredient`, body);
-        return res;
-    } catch (error) {
-        console.log(error);
-        return error.response && error.response.data;
-    }
+
+export const addProvider = async (body) => {
+  try {
+    const res = await httpRequest.post("/provider/create", body);
+    return res;
+  } catch (error) {
+    console.log(error);
+    return error.response && error.response.data;
+  }
 };
-export const editIngredientFromRecipe = async (body) => {
-    try {
-        const res = await httpRequest.patch(`recipe-ingredient`, body);
-        return res;
-    } catch (error) {
-        console.log(error);
-        return error.response && error.response.data;
-    }
+
+export const editProvider = async (id, body) => {
+  try {
+    const res = await httpRequest.patch(`/provider/update/${id}`, body);
+    return res;
+  } catch (error) {
+    console.log(error);
+    return error.response && error.response.data;
+  }
 };
-export const removeIngredientFromRecipe = async (body) => {
-    try {
-        const res = await httpRequest.del(`recipe-ingredient`, { data: body });
-        return res;
-    } catch (error) {
-        console.log(error);
-        return error.response && error.response.data;
-    }
+
+export const deleteProvider = async (id) => {
+  try {
+    const res = await httpRequest.del(`provider/delete/${id}`);
+    return res;
+  } catch (error) {
+    console.log(error);
+    return error.response && error.response.data;
+  }
 };
-export const getListToppingByType = async (idType) => {
-    try {
-        const res = await httpRequest.get(`recipe/type-topping/${idType}`);
-        return res;
-    } catch (error) {
-        console.log(error);
-        return error.response && error.response.data;
-    }
+
+// Invoice
+export const getListInvoice = async () => {
+  try {
+    const res = await httpRequest.get("invoice");
+    return res;
+  } catch (error) {
+    console.log(error);
+    return error.response && error.response.data;
+  }
 };
-export const addToppingToType = async (recipeId, typeId) => {
-    const body = {
-        recipeId,
-        typeId,
-    };
-    try {
-        const res = await httpRequest.post(`recipe-type`, body);
-        return res;
-    } catch (error) {
-        console.log(error);
-        return error.response && error.response.data;
-    }
+
+export const getConfirmInvoice = async (id) => {
+  try {
+    const res = await httpRequest.get(`invoice/confirm/${id}`);
+    return res;
+  } catch (error) {
+    console.log(error);
+    return error.response && error.response.data;
+  }
 };
-export const delToppingFromType = async (recipeId, typeId) => {
-    const body = {
-        recipeId,
-        typeId,
-    };
-    try {
-        const res = await httpRequest.del(`recipe-type`, { data: body });
-        return res;
-    } catch (error) {
-        console.log(error);
-        return error.response && error.response.data;
-    }
+
+export const getDetailInvoice = async (id) => {
+  try {
+    const res = await httpRequest.get(`invoice/detail/${id}`);
+    return res;
+  } catch (error) {
+    console.log(error);
+    return error.response && error.response.data;
+  }
+}
+
+
+// Import
+export const getListImport = async () => {
+  try {
+    const res = await httpRequest.get("import");
+    return res;
+  } catch (error) {
+    console.log(error);
+    return error.response && error.response.data;
+  }
 };
-export const uploadFile = async (my_file) => {
-    const config = {
-        headers: { 'Content-Type': 'multipart/form-data' },
-    };
-    const body = {
-        my_file,
-    };
-    try {
-        const res = await httpRequest.post(`auth/upload`, body, config);
-        return res;
-    } catch (error) {
-        console.log(error);
-        return error.response && error.response.data;
-    }
+
+export const getListInOneImport = async (id) => {
+  try {
+    const res = await httpRequest.get(`import/list/${id}`);
+    return res;
+  } catch (error) {
+    console.log(error);
+    return error.response && error.response.data;
+  }
+};
+
+export const getImportDetail = async (id) => {
+  try {
+    const res = await httpRequest.get(`import/detail/${id}`);
+    return res;
+  } catch (error) {
+    console.log(error);
+    return error.response && error.response.data;
+  }
+};
+
+export const updateImport = async (id, body) => {
+  try {
+    console.log("Body: ", body);
+    console.log("ID: ", id);
+    const res = await httpRequest.put(`/import/update/${id}`, body);
+    return res;
+  } catch (error) {
+    console.log(error);
+    return error.response && error.response.data;
+  }
+};
+
+export const completeImport = async (id, body) => {
+  try {
+    console.log("Body: ", body);
+    console.log("ID: ", id);
+    const res = await httpRequest.put(`/import/complete/${id}`, body);
+    return res;
+  } catch (error) {
+    console.log(error);
+    return error.response && error.response.data;
+  }
+};
+
+export const deleteImport = async (id) => {
+  try {
+    console.log("ID: ", id);
+    const res = await httpRequest.del(`/import/delete/${id}`);
+    return res;
+  } catch (error) {
+    console.log(error);
+    return error.response && error.response.data;
+  }
+};
+
+// Profile
+export const updateProfile = async (body) => {
+  console.log("Body: ", body);
+  try {
+    const res = httpRequest.put("/auth/updateprofile");
+    return res;
+  } catch (error) {
+    console.log(error);
+    return error.response && error.response.data;
+  }
 };

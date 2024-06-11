@@ -22,6 +22,18 @@ export const logoutRequest = async () => {
     }
 }
 
+export const updateStaff = async (id, body) => {
+    try {
+        console.log(id);
+        console.log(body);
+        const res = await httpRequest.patch(`staff/update/${id}`, body);
+        return res;
+    } catch (error) {
+        console.log(error);
+        return error.response && error.response.data;
+    }
+}
+
 export const refreshToken = async (phone) => {
     const body = {
         phone,

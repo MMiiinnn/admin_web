@@ -84,7 +84,7 @@ function Login() {
                 variant="standard"
                 type="email"
                 label="Email"
-                onChange={(e) => setEmail(e.target.value)}
+                onChange={(e) => setEmail(e.target.value.toLowerCase())}
                 value={email}
                 name="email"
                 margin="normal"

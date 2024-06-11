@@ -1,8 +1,8 @@
 import { tokens } from "../theme";
-import * as shopService from "../services/shopService";
+import * as adminService from "../services/adminService";
 
 export const fetchStaff = async () => {
-  const results =  await shopService.getListStaff();
+  const results =  await adminService.getListStaff();
   const data = results.data
 
   const staffList = data.map(person => ({
@@ -15,6 +15,63 @@ export const fetchStaff = async () => {
   }))
   return staffList;
 };
+
+export const fetchProvider = async () => {
+  const results =  await adminService.getListProvider();
+  const data = results.data
+
+  const providerList = data.map(person => ({
+    id: person.id_provider,
+    name: person.name,
+    phone: person.phone,
+    address: person.address,
+    status: person.status,
+  }))
+  return providerList;
+};
+
+export const fetchInvoice = async () => {
+  const results =  await adminService.getListInvoice();
+  const data = results.data
+  console.log("Test data: ", data)
+  console.log("Test result: ", results)
+
+  const fetchInvoice = data.map(invoice => ({
+    id: invoice.id_invoice,
+    id_customer: invoice.id_customer,
+    id_staff: invoice.id_staff,
+    id_status: invoice.id_status,
+    id_payment_method: invoice.id_payment_method,
+    date: invoice.datetime,
+    ship_fee: invoice.ship_fee,
+    item_fee:  invoice.item_fee,
+    total: invoice.total,
+    address: invoice.address,
+    description: invoice.description,
+    name_status: invoice.name_status,
+    name_payment_method: invoice.name_payment_method,
+  }))
+  return fetchInvoice;
+};
+
+export const fetchImport = async () => {
+  const results =  await adminService.getListImport();
+  const data = results.data
+
+  const fetchImport = data.map(info => ({
+    id: info.id_import,
+    id_provider: info.id_provider,
+    id_staff: info.id_staff,
+    date: info.datetime,
+    status: info.status,
+    description: info.description,
+    name_staff: info.name_staff,
+    name_provider: info.name_provider,
+  }))
+  return fetchImport;
+};
+
+
 
 export const mockDataContacts = [
   {

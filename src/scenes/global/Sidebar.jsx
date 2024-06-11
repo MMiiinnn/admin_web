@@ -6,7 +6,6 @@ import "react-pro-sidebar/dist/css/styles.css";
 import { tokens } from "../../theme";
 import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
 import PeopleOutlinedIcon from "@mui/icons-material/PeopleOutlined";
-import ContactsOutlinedIcon from "@mui/icons-material/ContactsOutlined";
 import ReceiptOutlinedIcon from "@mui/icons-material/ReceiptOutlined";
 import PersonOutlinedIcon from "@mui/icons-material/PersonOutlined";
 import CalendarTodayOutlinedIcon from "@mui/icons-material/CalendarTodayOutlined";
@@ -14,6 +13,11 @@ import HelpOutlineOutlinedIcon from "@mui/icons-material/HelpOutlineOutlined";
 import BarChartOutlinedIcon from "@mui/icons-material/BarChartOutlined";
 import PieChartOutlineOutlinedIcon from "@mui/icons-material/PieChartOutlineOutlined";
 import TimelineOutlinedIcon from "@mui/icons-material/TimelineOutlined";
+import MapsHomeWorkOutlinedIcon from '@mui/icons-material/MapsHomeWorkOutlined';
+import BeenhereOutlinedIcon from '@mui/icons-material/BeenhereOutlined';
+import DownloadOutlinedIcon from '@mui/icons-material/DownloadOutlined';
+import ImportExportOutlinedIcon from '@mui/icons-material/ImportExportOutlined';
+
 import { isLogin } from "../../api/request";
 import config from "../../config";
 
@@ -40,7 +44,7 @@ const Sidebar = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
 
-  const [selected, setSelected] = useState("Dashboard");
+  const [selected, setSelected] = useState("Quản lý");
   const [profile, setProfile] = useState(null);
 
   useEffect(() => {
@@ -120,12 +124,11 @@ const Sidebar = () => {
             paddingLeft="10%"
           >
             <Item
-              title="Dashboard"
+              title="Quản lý"
               to={config.routes.dashboard}
               icon={<HomeOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
-              // sx={{ userSelect: "none" }}
             />
 
             <Typography
@@ -136,21 +139,28 @@ const Sidebar = () => {
               Data
             </Typography>
             <Item
-              title="Manage Staff"
+              title="Nhân viên"
               to={config.routes.staff}
               icon={<PeopleOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
             />
             <Item
-              title="Contacts Information"
-              to={config.routes.contacts}
-              icon={<ContactsOutlinedIcon />}
+              title="Nhà cung cấp"
+              to={config.routes.provider}
+              icon={<MapsHomeWorkOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
             />
             <Item
-              title="Invoices Balances"
+              title="Đơn nhập"
+              to={config.routes.import}
+              icon={<ImportExportOutlinedIcon />}
+              selected={selected}
+              setSelected={setSelected}
+            />
+            <Item
+              title="Hóa đơn"
               to={config.routes.invoices}
               icon={<ReceiptOutlinedIcon />}
               selected={selected}
@@ -162,12 +172,26 @@ const Sidebar = () => {
               color={colors.grey[300]}
               sx={{ m: "15px 0 5px 20px" }}
             >
-              Pages
+              Forms
             </Typography>
             <Item
-              title="Profile Form"
-              to={config.routes.form}
+              title="Thêm nhân viên"
+              to={config.routes.formAddStaff}
               icon={<PersonOutlinedIcon />}
+              selected={selected}
+              setSelected={setSelected}
+            />
+            <Item
+              title="Thêm đơn nhập"
+              to={config.routes.formAddImport}
+              icon={<DownloadOutlinedIcon />}
+              selected={selected}
+              setSelected={setSelected}
+            />
+            <Item
+              title="Thêm nhà cung cấp"
+              to={config.routes.formAddProvider}
+              icon={<BeenhereOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
             />
@@ -178,7 +202,7 @@ const Sidebar = () => {
               selected={selected}
               setSelected={setSelected}
             />
-            <Item
+            {/* <Item
               title="Order"
               to={config.routes.order}
               icon={<HelpOutlineOutlinedIcon />}
@@ -213,7 +237,7 @@ const Sidebar = () => {
               icon={<TimelineOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
-            />
+            /> */}
           </Box>
         </Menu>
       </ProSidebar>

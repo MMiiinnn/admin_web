@@ -7,7 +7,6 @@ import { useState, useContext } from "react";
 import { logoutRequest } from "../api/request";
 import Cookies from "js-cookie";
 
-
 export default function PositionedMenu() {
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
@@ -21,21 +20,27 @@ export default function PositionedMenu() {
     setAnchorEl(null);
   };
 
-  const handleClickSubNav = async () => {
+  const handleClickLogout = async () => {
     await logoutRequest();
-    Cookies.remove('data')
-    navigate("/login");
+    Cookies.remove("data");
     window.location.reload();
   };
 
+  const handleClickProfile = async () => {
+    navigate("/profile");
+  }
+
   return (
-    <div>
-      <IconButton onClick={handleClick}>
-        <PersonOutlinedIcon />
-      </IconButton>
-      <Menu anchorEl={anchorEl} open={open} onClose={handleClose}>
-        <MenuItem onClick={handleClickSubNav}>Logout</MenuItem>
-      </Menu>
-    </div>
+    <>
+      <div>
+        <IconButton onClick={handleClick}>
+          <PersonOutlinedIcon />
+        </IconButton>
+        <Menu anchorEl={anchorEl} open={open} onClose={handleClose}>
+          <MenuItem onClick={handleClickLogout}>Đăng xuất</MenuItem>
+          <MenuItem onClick={handleClickProfile}>Tài khoản</MenuItem>
+        </Menu>
+      </div>
+    </>
   );
 }

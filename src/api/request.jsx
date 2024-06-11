@@ -21,9 +21,6 @@ export const isLogin = async () => {
 export const loginRequest = async (body) => {
     try {
         const res = await httpRequest.post("/auth/admin/login", body);
-        // const token = res.data.token;
-        // localStorage.setItem("token", token);
-
         console.log(res.message);
         return res;
     } catch (error) {

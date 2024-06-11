@@ -6,10 +6,13 @@ const routes = {
     profile: '/profile',
     bar: '/bar',
     line: '/line',
-    form: '/form',
+    formAddStaff: '/formAddStaff',
+    formAddProvider: '/formAddProvider',
+    formAddImport: '/formAddImport',
     pie: '/pie',
-    contacts: '/contacts',
+    import: '/import',
     calendar: '/calendar',
     order: '/order',
+    provider: '/provider', 
 };
 export default routes;

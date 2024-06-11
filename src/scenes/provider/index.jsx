@@ -11,16 +11,16 @@ import SaveIcon from "@mui/icons-material/Save";
 import CancelIcon from "@mui/icons-material/Close";
 
 import { tokens } from "../../theme";
-import { fetchStaff } from "../../data/data"; // Change to call API
+import { fetchProvider } from "../../data/data"; // Change to call API
 import Header from "../../components/Header";
 import { useEffect, useState } from "react";
-import { updateStaff, deleteStaff } from "../../services/adminService";
+import { updateProvider, deleteProvider } from "../../services/adminService";
 
-function Staff() {
+function Provider() {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
 
-  const [listStaff, setListStaff] = useState({});
+  const [listProvider, setlistProvider] = useState({});
   const [rows, setRows] = useState();
 
   // state để check đang chỉnh sửa
@@ -28,16 +28,19 @@ function Staff() {
 
   useEffect(() => {
     const getList = async () => {
-      const res = await fetchStaff();
+      const res = await fetchProvider();
       const results = res.filter((row) => row.status === 1)
-      // console.log(results);
+      console.log(results);
       if (results) {
-        setListStaff(results);
+        setlistProvider(results);
         setRows(results);
       }
     };
     getList();
   }, []);
+
+  console.log("rows test below useEffect: ", rows);
+  console.log("listProvider test below useEffect: ", listProvider);
 
   // Xử lý khi bấm ra ngoài hàng khác
   const handleRowEditStop = (params, event) => {
@@ -58,20 +61,15 @@ function Staff() {
 
   // handle nút delete
   const handleDeleteClick = (id) => async () => {
-    await deleteStaff(id);
-    setRows(rows.filter((row) => row.id !== id));
+    await deleteProvider(id);
+    setRows((preRows) => preRows.filter((row) => row.id !== id));
     window.location.reload();
   };
 
-  // Cập nhật
+  // handle nút save
   const handleUpdateRow = async (newRow, oldRow) => {
-    const body = {
-      name: newRow.name,
-      phone: newRow.phone,
-      address: newRow.address
-    }
     try {
-      await updateStaff(newRow.id, body);
+      await updateProvider(newRow.id, newRow);
       const updatedRows = rows.map((row) =>
         row.id === newRow.id ? newRow : row
       );
@@ -102,10 +100,10 @@ function Staff() {
       field: "id",
       headerName: "ID",
     },
-    // cột tên
+    // cột công ty
     {
       field: "name",
-      headerName: "Họ tên",
+      headerName: "Công ty",
       flex: 1,
       cellClassName: "name-column--cell",
       editable: true,
@@ -114,7 +112,7 @@ function Staff() {
     {
       field: "phone",
       headerName: "Số điện thoại",
-      flex: 1,
+      // flex: 1,
       editable: true,
     },
     // cột địa chỉ
@@ -129,7 +127,7 @@ function Staff() {
       field: "actions",
       type: "actions",
       headerName: "Chức năng",
-      flex: 1,
+      // flex: 1,
       cellClassName: "actions",
       getActions: ({ id }) => {
         // check xem có đang chỉnh sửa hay không
@@ -176,7 +174,7 @@ function Staff() {
 
   return (
     <Box m="20px">
-      <Header title="Quản lý nhân viên" subtitle="Danh sách" />
+      <Header title="Quản lý nhà cung cấp" subtitle="Danh sách" />
       {/* Có phần form không cần thêm new */}
 
       <Box
@@ -206,7 +204,7 @@ function Staff() {
         }}
       >
         <DataGrid
-          rows={listStaff}
+          rows={listProvider}
           columns={columns}
           editMode="row"
           // Xử lý cập nhật hàng
@@ -223,4 +221,4 @@ function Staff() {
   );
 }
 
-export default Staff;
+export default Provider;
