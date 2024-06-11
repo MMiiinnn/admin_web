@@ -205,6 +205,17 @@ export const deleteImport = async (id) => {
   }
 };
 
+export const addImport = async (body) => {
+  try {
+    const res = await httpRequest.post(`/import/create`, body);
+    return res;
+  } catch (error) {
+    console.log(error);
+    return error.response && error.response.data;
+  }
+};
+
+
 // Profile
 export const updateProfile = async (body) => {
   console.log("Body: ", body);

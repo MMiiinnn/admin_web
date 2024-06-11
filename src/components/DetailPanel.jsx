@@ -160,7 +160,7 @@ function DetailPanel({ row, handleClose, detail }) {
             </span>
           </Typography>
           <Stack direction="row" spacing={2}>
-            {row.id_status === 0 && (
+            {row.id_status === 1 && (
               <Button
                 type="submit"
                 variant="contained"

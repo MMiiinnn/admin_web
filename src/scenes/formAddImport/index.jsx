@@ -3,19 +3,16 @@ import { Formik } from "formik";
 import * as yup from "yup";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import Header from "../../components/Header";
-import { addStaff } from "../../services/adminService";
+import { addImport } from "../../services/adminService";
 
 const initialValues = {
-  name_provider: "",
-  name_staff: "",
-  phone: "",
-  address: "",
-  password: "",
+  id_provider: "",
+  description: "",
 };
 
 const userSchema = yup.object().shape({
-  name_provider: yup.string().required("Không được bỏ trống!"),
-  name_staff: yup.string().required("Không được bỏ trống!"),
+  id_provider: yup.string().required("Không được bỏ trống!"),
+  description: yup.string().required("Không được bỏ trống!"),
 });
 
 function FormAddStaff() {
@@ -24,9 +21,9 @@ function FormAddStaff() {
   const handleFormSubmit = async (values, { resetForm }) => {
     console.log(values);
     try {
-      const res = await addStaff(values)
+      const res = await addImport(values)
       if(res){
-        alert("Thêm nhân viên thành công!");
+        alert("Thêm đơn nhập thành công!");
         resetForm();
       }
     } catch (error) {
@@ -63,39 +60,26 @@ function FormAddStaff() {
                 fullWidth
                 variant="filled"
                 type="text"
-                label="Tên công ty"
+                label="ID nhà cung cấp"
                 onBlur={handleBlur}
                 onChange={handleChange}
-                value={values.name}
-                name="name_provider"
-                error={!!touched.name_provider && !!errors.name_provider}
-                helperText={touched.name_provider && errors.name_provider}
+                value={values.id_provider}
+                name="id_provider"
+                error={!!touched.id_provider && !!errors.id_provider}
+                helperText={touched.id_provider && errors.id_provider}
                 sx={{ gridColumn: "span 4" }}
               />
               <TextField
                 fullWidth
                 variant="filled"
                 type="text"
-                label="Tên nhân viên phụ trách"
+                label="Mô tả"
                 onBlur={handleBlur}
                 onChange={handleChange}
-                value={values.name_staff}
-                name="name_staff"
-                error={!!touched.name_staff && !!errors.name_staff}
-                helperText={touched.name_staff && errors.name_staff}
-                sx={{ gridColumn: "span 4" }}
-              />
-              <TextField
-                fullWidth
-                variant="filled"
-                type="text"
-                label="Số điện thoại"
-                onBlur={handleBlur}
-                onChange={handleChange}
-                value={values.phone}
-                name="phone"
-                error={!!touched.phone && !!errors.phone}
-                helperText={touched.phone && errors.phone}
+                value={values.description}
+                name="description"
+                error={!!touched.description && !!errors.description}
+                helperText={touched.description && errors.description}
                 sx={{ gridColumn: "span 4" }}
               />
             </Box>
