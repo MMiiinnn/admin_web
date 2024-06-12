@@ -40,16 +40,6 @@ export const logoutRequest = async () => {
     }
 }
 
-export const getStaff = async () => {
-    const path = `/staff`
-    try {
-        const response = await httpRequest.get(path)
-        console.log(response.message);
-    }catch (error) {
-        console.log(error);   
-    }
-}
-
 export const get = async (path, config = {}) => {
     try {
         const response = await httpRequest.get(path, config);

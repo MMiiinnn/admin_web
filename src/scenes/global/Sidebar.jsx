@@ -12,8 +12,7 @@ import CalendarTodayOutlinedIcon from "@mui/icons-material/CalendarTodayOutlined
 import MapsHomeWorkOutlinedIcon from '@mui/icons-material/MapsHomeWorkOutlined';
 import BeenhereOutlinedIcon from '@mui/icons-material/BeenhereOutlined';
 import DownloadOutlinedIcon from '@mui/icons-material/DownloadOutlined';
-import ImportExportOutlinedIcon from '@mui/icons-material/ImportExportOutlined';
-
+import Inventory2OutlinedIcon from '@mui/icons-material/Inventory2Outlined';
 import { isLogin } from "../../api/request";
 import config from "../../config";
 
@@ -149,13 +148,13 @@ const Sidebar = () => {
               selected={selected}
               setSelected={setSelected}
             />
-            {/* <Item
-              title="Đơn nhập"
-              to={config.routes.import}
-              icon={<ImportExportOutlinedIcon />}
+            <Item
+              title="Hàng hóa"
+              to={config.routes.item}
+              icon={<Inventory2OutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
-            /> */}
+            />
             <Item
               title="Hóa đơn"
               to={config.routes.invoices}

@@ -14,6 +14,7 @@ import FormAddProvider from "../scenes/formAddProvider";
 import FormAddImport from "../scenes/formAddImport";
 import Import from "../scenes/import";
 import Profile from "../scenes/profile";
+import Item from "../scenes/item";
 
 
 export const publicRoutes = [{ path: config.routes.login, component: Login }];
@@ -31,4 +32,5 @@ export const privateRoutes = [
     { path: config.routes.pie, component: Pie, layout: DefaultLayout  },
     { path: config.routes.calendar, component: Calendar, layout: DefaultLayout  },
     { path: config.routes.profile, component: Profile, layout: DefaultLayout  },
+    { path: config.routes.item, component: Item, layout: DefaultLayout  },
 ];

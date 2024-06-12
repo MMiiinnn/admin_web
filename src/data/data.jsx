@@ -71,6 +71,27 @@ export const fetchImport = async () => {
   return fetchImport;
 };
 
+export const fetchItem = async () => {
+  const results =  await adminService.getListItem();
+  const data = results.data;
+
+  const itemList = data.map(item => ({
+    id: item.id_item,
+    id_type: item.id_type,
+    id_origin: item.id_origin,
+    id_material: item.id_material,
+    id_brand: item.id_brand,
+    id_status: item.id_status,
+    name: item.name,
+    image: item.image,
+    description: item.description,
+    status: item.status,
+    sizes: item.sizes,
+  }))
+  return itemList;
+};
+
+
 
 
 export const mockDataContacts = [

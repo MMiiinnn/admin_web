@@ -14,5 +14,6 @@ const routes = {
     calendar: '/calendar',
     order: '/order',
     provider: '/provider', 
+    item: '/item', 
 };
 export default routes;

@@ -227,3 +227,58 @@ export const updateProfile = async (body) => {
     return error.response && error.response.data;
   }
 };
+
+// Item
+export const getListItem = async () => {
+  try {
+    const res = await httpRequest.get(`/item?page=1`);
+    console.log(res)
+    return res;
+  } catch (error) {
+    console.log(error);
+    return error.response && error.response.data;
+  }
+};
+
+export const getDetailItem = async (id) => {
+  try {
+    const res = await httpRequest.get(`/item/detail/${id}`);
+    return res;
+  } catch (error) {
+    console.log(error);
+    return error.response && error.response.data;
+  }
+};
+
+export const updateItem = async (id, body) => {
+  try {
+    console.log("Body: ", body);
+    console.log("ID: ", id);
+    const res = await httpRequest.put(`/item/update/${id}`, body);
+    return res;
+  } catch (error) {
+    console.log(error);
+    return error.response && error.response.data;
+  }
+};
+
+export const deleteItem = async (id) => {
+  try {
+    console.log("ID: ", id);
+    const res = await httpRequest.put(`/item/complete/${id}`);
+    return res;
+  } catch (error) {
+    console.log(error);
+    return error.response && error.response.data;
+  }
+};
+
+export const addItem = async (body) => {
+  try {
+    const res = await httpRequest.post(`/item/create`, body);
+    return res;
+  } catch (error) {
+    console.log(error);
+    return error.response && error.response.data;
+  }
+};
