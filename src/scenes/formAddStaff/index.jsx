@@ -11,6 +11,7 @@ const initialValues = {
   phone: "",
   address: "",
   password: "",
+  retypePassword: "",
 };
 
 const phoneRegExp = /([\\+84|84|0]+(3|5|7|8|9|1[2|6|8|9]))+([0-9]{8})\b/;
@@ -24,6 +25,10 @@ const userSchema = yup.object().shape({
     .required("Không được bỏ trống!"),
   address: yup.string().required("Không được bỏ trống!"),
   password: yup.string().required("Không được bỏ trống!"),
+  retypePassword: yup
+    .string()
+    .oneOf([yup.ref('password'), null], 'Mật khẩu nhập lại không khớp!')
+    .required("Không được bỏ trống!"),
 });
 
 function FormAddStaff() {
@@ -122,7 +127,7 @@ function FormAddStaff() {
               <TextField
                 fullWidth
                 variant="filled"
-                type="text"
+                type="password"
                 label="Mật khẩu"
                 onBlur={handleBlur}
                 onChange={handleChange}
@@ -130,6 +135,19 @@ function FormAddStaff() {
                 name="password"
                 error={!!touched.password && !!errors.password}
                 helperText={touched.password && errors.password}
+                sx={{ gridColumn: "span 4" }}
+              />
+              <TextField
+                fullWidth
+                variant="filled"
+                type="password"
+                label="Nhập lại mật khẩu"
+                onBlur={handleBlur}
+                onChange={handleChange}
+                value={values.retypePassword}
+                name="retypePassword"
+                error={!!touched.retypePassword && !!errors.retypePassword}
+                helperText={touched.retypePassword && errors.retypePassword}
                 sx={{ gridColumn: "span 4" }}
               />
             </Box>

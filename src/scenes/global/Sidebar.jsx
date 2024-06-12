@@ -71,6 +71,7 @@ const Sidebar = () => {
         "& .pro-menu-item.active": {
           color: "#6870fa !important",
         },
+        height: "100vh",
       }}
     >
       <ProSidebar>
@@ -89,7 +90,7 @@ const Sidebar = () => {
                 textAlign="center"
               >
                 <Typography variant="h3" color={colors.grey[100]}>
-                  ADMINIS
+                  FOOTWEAR
                 </Typography>
               </Box>
             }
@@ -148,13 +149,13 @@ const Sidebar = () => {
               selected={selected}
               setSelected={setSelected}
             />
-            <Item
+            {/* <Item
               title="Đơn nhập"
               to={config.routes.import}
               icon={<ImportExportOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
-            />
+            /> */}
             <Item
               title="Hóa đơn"
               to={config.routes.invoices}

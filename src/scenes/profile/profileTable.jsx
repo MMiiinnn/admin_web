@@ -22,12 +22,12 @@ const ProfileTable = (profile) => {
 
   const initialData = [
     {
+      email: profile.profile.data.email,
       name: profile.profile.data.name,
       phone: profile.profile.data.phone,
-      email: profile.profile.data.email,
     },
   ];
-
+  // console.log("test: ",initialData)
   const [rows, setRows] = useState(initialData);
   const [editMode, setEditMode] = useState(false);
   const [editedRows, setEditedRows] = useState(initialData);
@@ -39,6 +39,8 @@ const ProfileTable = (profile) => {
   const handleSaveClick = async () => {
     try {
       await updateProfile(editedRows);
+      console.log("test: ", editedRows)
+
     } catch (error) {
       console.log(error);
       return error.response && error.response.data;
@@ -62,6 +64,12 @@ const ProfileTable = (profile) => {
       return row;
     });
     setEditedRows(newRows);
+  };
+
+  const handleEnter = (e) => {
+    if (e.charCode === 13 && e.code === "Enter") {
+      handleSaveClick();
+    }
   };
 
   return (
@@ -136,6 +144,7 @@ const ProfileTable = (profile) => {
               variant="contained"
               startIcon={<SaveIcon />}
               onClick={handleSaveClick}
+              onKeyDown={handleEnter}
               sx={{
                 color: colors.grey[100],
                 "&:hover": {

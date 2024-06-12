@@ -220,7 +220,7 @@ export const addImport = async (body) => {
 export const updateProfile = async (body) => {
   console.log("Body: ", body);
   try {
-    const res = httpRequest.put("/auth/updateprofile");
+    const res = httpRequest.put("/auth/updateprofile", body);
     return res;
   } catch (error) {
     console.log(error);
